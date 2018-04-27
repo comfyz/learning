@@ -3,12 +3,12 @@ package xyz.comfyz.learning.swagger.controller;
 import io.swagger.annotations.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
+import xyz.comfyz.exceptions.core.ErrorMessage;
+import xyz.comfyz.exceptions.exception.BadRequestException;
 import xyz.comfyz.learning.swagger.enums.Gender;
 import xyz.comfyz.learning.swagger.model.User;
 import xyz.comfyz.learning.swagger.model.converter.UserConverter;
 import xyz.comfyz.learning.swagger.vo.user.UserUpdateRequest;
-import xyz.comfyz.rest.exceptions.exception.BadRequestException;
-import xyz.comfyz.rest.exceptions.handler.ErrorMessage;
 
 import java.util.Collection;
 import java.util.Map;
@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Version:     1.0
  * Description:
  */
-@Api(tags = "用户管理", description = "包含对用户的CURD操作")
+@Api(tags = {"用户管理", "用户系统"}, description = "包含对用户的CURD操作")
 @ApiResponses({@ApiResponse(code = 200, message = "OK"),
         @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorMessage.class),
         @ApiResponse(code = 400, message = "Bad Request", response = ErrorMessage.class)})
@@ -51,7 +51,7 @@ public class UserController {
      * - body    以流的形式提交 仅支持POST
      * - header  参数在request headers 里边提交
      * - form    以form表单的形式提交 仅支持POST
-     *
+     * <p>
      * dataType
      * - Long
      * - String
@@ -100,4 +100,14 @@ public class UserController {
         return userCache.remove(id);
     }
 
+    @ApiOperation("测试spring线程池")
+    @GetMapping("test")
+    public String test() throws InterruptedException {
+        long wait = 1000 * 5;
+        String threadName = Thread.currentThread().getName();
+        System.out.println(">>>>>>>>>>>>>>>>>>>" + threadName + " SLEEP " + wait + "ms");
+        Thread.sleep(wait);
+//        System.out.println(">>>>>>>>>>>>>>>>>>>" + threadName + " FINISH " + wait + "ms");
+        return Thread.currentThread().getName();
+    }
 }

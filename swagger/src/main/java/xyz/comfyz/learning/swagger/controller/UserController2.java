@@ -3,12 +3,12 @@ package xyz.comfyz.learning.swagger.controller;
 import io.swagger.annotations.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
+import xyz.comfyz.exceptions.core.ErrorMessage;
+import xyz.comfyz.exceptions.exception.BadRequestException;
 import xyz.comfyz.learning.swagger.enums.Gender;
 import xyz.comfyz.learning.swagger.model.User;
 import xyz.comfyz.learning.swagger.model.converter.UserConverter;
 import xyz.comfyz.learning.swagger.vo.user.UserUpdateRequest;
-import xyz.comfyz.rest.exceptions.exception.BadRequestException;
-import xyz.comfyz.rest.exceptions.handler.ErrorMessage;
 
 import java.util.Collection;
 import java.util.Map;
@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Version:     1.0
  * Description:
  */
-@Api(tags = {"用户管理", "用户系统"}, description = "包含对用户的CURD等操作")
+@Api(tags = {"用户系统"}, description = "包含对用户的CURD等操作")
 @ApiResponses({@ApiResponse(code = 200, message = "OK"),
         @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorMessage.class),
         @ApiResponse(code = 400, message = "Bad Request", response = ErrorMessage.class)})

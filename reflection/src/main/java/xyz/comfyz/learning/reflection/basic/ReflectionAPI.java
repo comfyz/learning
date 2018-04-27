@@ -1,4 +1,4 @@
-package xyz.comfyz.learning.reflection;
+package xyz.comfyz.learning.reflection.basic;
 
 import java.lang.reflect.*;
 import java.util.Arrays;

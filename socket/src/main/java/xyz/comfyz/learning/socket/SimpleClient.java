@@ -1,5 +1,6 @@
 package xyz.comfyz.learning.socket;
 
+import java.io.IOException;
 import java.net.Socket;
 
 /**
@@ -7,17 +8,23 @@ import java.net.Socket;
  */
 public class SimpleClient {
     public static void main(String args[]) throws Exception {
-        final int length = 100;
+        final int length = 10;
         String host = "localhost";
         int port = 8000;
 
         Socket[] sockets = new Socket[length];
         for (int i = 0; i < length; i++) {
-            sockets[i] = new Socket(host, port);
-            System.out.println("第" + (i + 1) + "次连接成功");
+            try {
+                sockets[i] = new Socket(host, port);
+                sockets[i].getOutputStream().write(i);
+                System.out.println("第" + (i + 1) + "次连接成功");
+            } catch (IOException e) {
+                System.out.println(e.getLocalizedMessage());
+            }
         }
         Thread.sleep(3000);
         for (int i = 0; i < length; i++)
-            sockets[i].close();      //断开连接
+            if (sockets[i] != null)
+                sockets[i].close();      //断开连接
     }
 }

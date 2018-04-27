@@ -18,17 +18,17 @@ public class SimpleServer {
 
     public static void main(String args[]) throws Exception {
         SimpleServer server = new SimpleServer();
-        Thread.sleep(1000 * 10);
-//        server.service();
+        server.service();
     }
 
-    public void service() {
+    public void service() throws InterruptedException {
         while (true) {
             Socket socket = null;
             try {
+                Thread.sleep(1000 * 10);
                 socket = serverSocket.accept();     //从连接请求队列中取出一个连接
                 System.out.println("New connection accepted " +
-                        socket.getInetAddress() + ":" + socket.getPort());
+                        socket.getInetAddress() + ":" + socket.getPort() + " MSG : " + socket.getInputStream().read());
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {

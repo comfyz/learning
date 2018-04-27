@@ -1,4 +1,4 @@
-package xyz.comfyz.learning.reflection;
+package xyz.comfyz.learning.reflection.basic;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -41,6 +41,7 @@ public class DeclaredTest {
     private static void test(Object obj) throws ClassNotFoundException {
         Class clazz = Class.forName(obj.getClass().getName());
 
+        Object o = new Object();
         Field[] fields = clazz.getDeclaredFields();
         System.out.println(clazz + "-[Field] : " + Arrays.toString(fields));
 
