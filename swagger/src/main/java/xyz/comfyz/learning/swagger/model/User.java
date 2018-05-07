@@ -1,6 +1,5 @@
 package xyz.comfyz.learning.swagger.model;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import xyz.comfyz.learning.swagger.enums.Gender;
@@ -12,7 +11,7 @@ import xyz.comfyz.learning.swagger.enums.Gender;
  * Version:     1.0
  * Description:
  */
-@ApiModel("用户")
+//@ApiModel("用户")
 @Getter
 public class User {
 

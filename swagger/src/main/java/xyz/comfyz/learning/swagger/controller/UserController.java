@@ -3,14 +3,16 @@ package xyz.comfyz.learning.swagger.controller;
 import io.swagger.annotations.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
-import xyz.comfyz.exceptions.core.ErrorMessage;
-import xyz.comfyz.exceptions.exception.BadRequestException;
+import xyz.comfyz.learning.swagger.Exceptions.common.BadRequestException;
+import xyz.comfyz.learning.swagger.Exceptions.model.ErrorMessage;
+import xyz.comfyz.learning.swagger.Result;
+import xyz.comfyz.learning.swagger.Slice;
 import xyz.comfyz.learning.swagger.enums.Gender;
 import xyz.comfyz.learning.swagger.model.User;
 import xyz.comfyz.learning.swagger.model.converter.UserConverter;
 import xyz.comfyz.learning.swagger.vo.user.UserUpdateRequest;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -22,7 +24,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Version:     1.0
  * Description:
  */
-@Api(tags = {"用户管理", "用户系统"}, description = "包含对用户的CURD操作")
+@Api(tags = "用户管理", description = "包含对用户的CURD操作")
 @ApiResponses({@ApiResponse(code = 200, message = "OK"),
         @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorMessage.class),
         @ApiResponse(code = 400, message = "Bad Request", response = ErrorMessage.class)})
@@ -59,16 +61,30 @@ public class UserController {
     @ApiOperation("获取用户信息")
     @ApiImplicitParam(paramType = "path", name = "id", value = "用户ID", required = true, dataType = "Long")
     @GetMapping("{id}")
-    public User find(@PathVariable Integer id) {
+    public User[] find(@PathVariable Integer id) {
         if (id == null || id <= 0)
             throw new BadRequestException("id is not present");
-        return userCache.get(id);
+        return new User[]{userCache.get(id)};
     }
 
     @ApiOperation("获取所有用户")
     @GetMapping("all")
-    public Collection<User> findAll() {
-        return userCache.values();
+    public Slice<User> findAll() {
+        Slice<User> slice = new Slice<>();
+        slice.setContent(new ArrayList<>(userCache.values()));
+        return slice;
+    }
+
+    @ApiOperation("获取所有用户")
+    @GetMapping("all2")
+    public Result<User> findAll2() {
+        return new Result<>(new ArrayList<>(userCache.values()));
+    }
+
+    @ApiOperation("获取所有用户")
+    @GetMapping("all3")
+    public Result<User> findAll3() {
+        return new Result<>(new ArrayList<>());
     }
 
     @ApiOperation("新增用户")
@@ -84,11 +100,11 @@ public class UserController {
     @PutMapping
     public User update(User user) {
         if (user.getId() == null || user.getId() <= 0) {
-            throw new BadRequestException("id is not present");
+            throw new RuntimeException("id is not present");
         }
         User oldUser = userCache.get(user.getId());
         if (oldUser == null)
-            throw new BadRequestException("user not found");
+            throw new RuntimeException("user not found");
         BeanUtils.copyProperties(user, oldUser);
         return oldUser;
     }
@@ -100,14 +116,4 @@ public class UserController {
         return userCache.remove(id);
     }
 
-    @ApiOperation("测试spring线程池")
-    @GetMapping("test")
-    public String test() throws InterruptedException {
-        long wait = 1000 * 5;
-        String threadName = Thread.currentThread().getName();
-        System.out.println(">>>>>>>>>>>>>>>>>>>" + threadName + " SLEEP " + wait + "ms");
-        Thread.sleep(wait);
-//        System.out.println(">>>>>>>>>>>>>>>>>>>" + threadName + " FINISH " + wait + "ms");
-        return Thread.currentThread().getName();
-    }
 }
