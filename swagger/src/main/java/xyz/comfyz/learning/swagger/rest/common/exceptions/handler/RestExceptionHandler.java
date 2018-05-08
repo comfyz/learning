@@ -4,6 +4,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import xyz.comfyz.learning.swagger.rest.common.exceptions.ErrorHandler;
@@ -22,6 +23,7 @@ import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
  * <p>
  * 全局异常处理
  */
+@RestControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     static final ExecutorService EXECUTOR = Executors.newSingleThreadExecutor();

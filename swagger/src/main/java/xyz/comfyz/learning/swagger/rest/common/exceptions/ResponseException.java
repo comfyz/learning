@@ -10,7 +10,7 @@ import xyz.comfyz.learning.swagger.rest.common.Code;
  *
  * </p>
  */
-public class ResponseException extends RuntimeException {
+public abstract class ResponseException extends RuntimeException {
 
     private final Code code;
 

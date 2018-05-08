@@ -100,11 +100,11 @@ public class UserController {
     @PutMapping
     public User update(User user) {
         if (user.getId() == null || user.getId() <= 0) {
-            throw new RuntimeException("id is not present");
+            throw new BadRequestException("id is not present");
         }
         User oldUser = userCache.get(user.getId());
         if (oldUser == null)
-            throw new RuntimeException("user not found");
+            throw new BadRequestException("user not found");
         BeanUtils.copyProperties(user, oldUser);
         return oldUser;
     }
