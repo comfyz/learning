@@ -1,4 +1,4 @@
-package xyz.comfyz.learning.swagger.Exceptions.code;
+package xyz.comfyz.learning.swagger.rest.common;
 
 import org.springframework.http.HttpStatus;
 
@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
  * <p>
  * 错误码，code格式应该前三位为httpstatus，后面为自定义码，比如400类异常 4001 4002等
  */
-public interface ErrorCode {
+public interface Code {
 
     /**
      * 获取 http状态码

@@ -1,4 +1,4 @@
-package xyz.comfyz.learning.swagger.Exceptions.handler;
+package xyz.comfyz.learning.swagger.rest.common.exceptions.handler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import xyz.comfyz.learning.swagger.Exceptions.model.ErrorMessage;
+import xyz.comfyz.learning.swagger.rest.common.exceptions.ErrorMessage;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;

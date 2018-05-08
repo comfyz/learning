@@ -1,4 +1,4 @@
-package xyz.comfyz.learning.swagger.Exceptions.model;
+package xyz.comfyz.learning.swagger.rest.common.exceptions;
 
 
 import io.swagger.annotations.ApiModel;

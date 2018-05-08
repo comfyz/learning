@@ -1,30 +1,25 @@
-package xyz.comfyz.learning.swagger.Exceptions.code;
+package xyz.comfyz.learning.swagger.rest.common;
 
 import org.springframework.http.HttpStatus;
 
 /**
  * @author :    comfy
- * @date :      2018-05-07 16:13:10
+ * @date :      2018-05-08 09:57:20
  * @since :     1.8
  * <p>
- * 此类异常都是请求不当造成的400错误
+ * 成功返回
  */
-public enum ErrorCode_400 implements ErrorCode {
+public enum Code_200 implements Code {
 
     /**
      * 请求异常，包括参数，数据格式等
      */
-    BAD_REQUEST(4000, "Bad Request"),
-
-    /**
-     * 不支持的 错误操作
-     */
-    UNSUPPORTED_OPERATION(4001, "Unsupported Operation");
+    SUCCESS(0, "ok");
 
     private final int code;
     private final String message;
 
-    ErrorCode_400(int code, String message) {
+    Code_200(int code, String message) {
         this.code = code;
         this.message = message;
     }

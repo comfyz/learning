@@ -1,7 +1,6 @@
-package xyz.comfyz.learning.swagger.Exceptions.common;
+package xyz.comfyz.learning.swagger.rest.common.exceptions;
 
-import xyz.comfyz.learning.swagger.Exceptions.code.ErrorCode;
-import xyz.comfyz.learning.swagger.Exceptions.model.ErrorMessage;
+import xyz.comfyz.learning.swagger.rest.common.Code;
 
 /**
  * @author :    comfy
@@ -13,24 +12,24 @@ import xyz.comfyz.learning.swagger.Exceptions.model.ErrorMessage;
  */
 public class ResponseException extends RuntimeException {
 
-    private final ErrorCode code;
+    private final Code code;
 
-    public ResponseException(ErrorCode code) {
+    public ResponseException(Code code) {
         super(code.message());
         this.code = code;
     }
 
-    public ResponseException(ErrorCode code, String msg) {
+    public ResponseException(Code code, String msg) {
         super(msg);
         this.code = code;
     }
 
-    public ResponseException(ErrorCode code, String msg, Throwable e) {
+    public ResponseException(Code code, String msg, Throwable e) {
         super(code.message(), e);
         this.code = code;
     }
 
-    public ErrorCode getCode() {
+    public Code getCode() {
         return code;
     }
 
